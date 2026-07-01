@@ -1,0 +1,246 @@
+<div style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); border-radius: 20px; padding: 3em 2em; margin: 2em 0; text-align: center; color: #fff;">
+  <h1 style="font-size: 2.2em; margin: 0 0 0.3em;">🤖 3 分钟部署自己的 LobeChat</h1>
+  <p style="font-size: 1.3em; opacity: 0.95; margin: 0;">支持 GPT / Claude / DeepSeek / Gemini 全部模型</p>
+  <p style="font-size: 0.9em; opacity: 0.7; margin-top: 1.5em;">功能比官方 ChatGPT 还强 · 数据在自己手里 · 一个界面切换所有模型</p>
+</div>
+
+<p>还在用 ChatGPT 网页版？自己搭一个 <strong>LobeChat</strong>，体验和功能都吊打官方。</p>
+
+<p>LobeChat 是目前 GitHub 上最火的 AI 客户端（Star 近 10 万），功能比官方 ChatGPT 强太多了：<strong>联网搜索、知识库、绘图、插件、Agent 对话</strong>，还能把多个模型放在同一个界面来回切换。</p>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 准备工作 ============= -->
+<div style="background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #0369a1;">📋 准备工作</h2>
+  <p style="color: #075985;">开始之前，你需要准备好：</p>
+  <ul style="color: #075985;">
+    <li><strong>一台服务器 / VPS</strong>（或者用 Vercel 免费部署）</li>
+    <li><strong>API 中转地址</strong>：比如 <code style="background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px;">https://api.wf1.one/v1</code></li>
+    <li><strong>中转 API Key</strong>：一个 sk- 开头的密钥</li>
+  </ul>
+
+  <div style="background: #fff; border-left: 4px solid #0284c7; padding: 1em 1.5em; border-radius: 8px; margin-top: 1em;">
+    <p style="margin: 0; color: #475569;"><strong>💡 没有中转服务？</strong>可以联系我，提供全模型支持。</p>
+  </div>
+</div>
+
+<!-- 截图占位 1 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图1：API 中转后台 — API 地址和 Key 的截图】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 方式一：Docker ============= -->
+<div style="background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #15803d;">🐳 方式一：Docker 部署（推荐）</h2>
+  <p style="color: #166534;">这种方式最适合自己有服务器/VPS 的人，一条命令搞定：</p>
+
+  <pre style="background: #052e16; color: #a7f3d0; padding: 1.2em; border-radius: 10px; overflow-x: auto; font-size: 0.9em;">
+docker run -d -p 3210:3210 \
+  -e OPENAI_API_KEY=你的中转Key \
+  -e OPENAI_PROXY_URL=https://api.wf1.one/v1 \
+  --name lobe-chat \
+  lobehub/lobe-chat</pre>
+
+  <p style="color: #166534; margin-top: 1em;">运行之后，浏览器打开 <strong>http://你的IP:3210</strong> 就能用了。</p>
+
+  <div style="background: #fff; border-left: 4px solid #16a34a; padding: 1em 1.5em; border-radius: 8px; margin-top: 1em;">
+    <p style="margin: 0; color: #475569;"><strong>💡 小提示：</strong>如果你有域名，可以用 Nginx/OpenResty 反代，加上 HTTPS，体验更好。</p>
+  </div>
+</div>
+
+<!-- 截图占位 2 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图2：Docker 运行成功后的终端截图】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 方式二：Vercel ============= -->
+<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #b45309;">▲ 方式二：Vercel 一键部署（免费）</h2>
+  <p style="color: #92400e;">没有服务器也能部署，Vercel 提供免费额度：</p>
+
+  <ol style="color: #92400e; padding-left: 1.5em;">
+    <li>访问 LobeChat 官方部署链接（GitHub 仓库 README 里有 Vercel 按钮）</li>
+    <li>点击 <strong>Deploy with Vercel</strong>，用 GitHub 账号登录</li>
+    <li>在环境变量设置页面填入：</li>
+  </ol>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 1em; background: #fff; border-radius: 10px; overflow: hidden;">
+    <thead>
+      <tr style="background: #d97706; color: #fff;">
+        <th style="padding: 10px 14px; text-align: left;">环境变量名</th>
+        <th style="padding: 10px 14px; text-align: left;">填写值</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #fde68a;">
+        <td style="padding: 10px 14px; font-family: monospace;">OPENAI_API_KEY</td>
+        <td style="padding: 10px 14px; font-family: monospace;">你的中转 Key</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #fde68a;">
+        <td style="padding: 10px 14px; font-family: monospace;">OPENAI_PROXY_URL</td>
+        <td style="padding: 10px 14px; font-family: monospace;">https://api.wf1.one/v1</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 14px; font-family: monospace;">ACCESS_CODE</td>
+        <td style="padding: 10px 14px; font-family: monospace;">自己设一个访问密码（可选）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="color: #92400e; margin-top: 1em;">部署完自动获得 https://xxx.vercel.app 域名，可以直接用。</p>
+</div>
+
+<!-- 截图占位 3 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图3：Vercel 部署页面的环境变量配置界面】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 支持的模型 ============= -->
+<div style="background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #7e22ce;">🔌 接入后你能用的模型</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1em; margin-top: 1em;">
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">🧠 GPT-4o</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">通用能力最强</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">💬 Claude 3.5 Sonnet</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">编程写作最优</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">🚀 DeepSeek V3 / R1</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">性价比之王</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">🔮 Gemini 2.0</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">多模态强</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">🏯 Qwen 2.5</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">中文理解好</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #e9d5ff;">
+      <h3 style="margin: 0 0 0.3em; color: #6b21a8;">⚡ GPT-4o-mini</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">便宜速度快</p>
+    </div>
+
+  </div>
+
+  <p style="color: #6b21a8; margin-top: 1.5em; font-style: italic;">以及任何兼容 OpenAI 格式的模型。LobeChat 内置了 100+ 模型预设，配置好的 Key 就能直接用。</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 配置多个模型 ============= -->
+<div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #059669;">⚙️ 进阶配置：接入多个模型</h2>
+  <p style="color: #065f46;">一个中转 Key 可以同时支持多个模型，LobeChat 默认会自动读取。</p>
+  <p style="color: #065f46;">如果你想让不同模型走不同的 Key，可以在环境变量里加：</p>
+
+  <pre style="background: #052e16; color: #a7f3d0; padding: 1.2em; border-radius: 10px; overflow-x: auto; font-size: 0.9em;">
+# 主 Key（默认模型）
+OPENAI_API_KEY=sk-xxxxx
+OPENAI_PROXY_URL=https://api.wf1.one/v1
+
+# Claude 单独配置
+ANTHROPIC_API_KEY=sk-xxxxx
+ANTHROPIC_PROXY_URL=https://api.wf1.one/v1</pre>
+
+  <p style="color: #065f46; margin-top: 0.5em;">LobeChat 自动识别多个 Provider，在界面上你可以随便切换。</p>
+</div>
+
+<!-- 截图占位 4 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图4：LobeChat 界面里切换不同模型的截图】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 为什么推荐 ============= -->
+<div style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #d97706;">🏆 为什么推荐自己搭？</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1em; margin-top: 1em;">
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a; text-align: center;">
+      <span style="font-size: 2em;">🔒</span>
+      <h3 style="margin: 0.5em 0 0; color: #92400e; font-size: 1em;">数据在自己手里</h3>
+      <p style="margin: 0.3em 0 0; color: #78716c; font-size: 0.85em;">隐私有保障</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a; text-align: center;">
+      <span style="font-size: 2em;">🔄</span>
+      <h3 style="margin: 0.5em 0 0; color: #92400e; font-size: 1em;">随意切换模型</h3>
+      <p style="margin: 0.3em 0 0; color: #78716c; font-size: 0.85em;">不受官方限制</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a; text-align: center;">
+      <span style="font-size: 2em;">🌐</span>
+      <h3 style="margin: 0.5em 0 0; color: #92400e; font-size: 1em;">无需梯子</h3>
+      <p style="margin: 0.3em 0 0; color: #78716c; font-size: 0.85em;">国内直接访问</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a; text-align: center;">
+      <span style="font-size: 2em;">📱</span>
+      <h3 style="margin: 0.5em 0 0; color: #92400e; font-size: 1em;">移动端也能用</h3>
+      <p style="margin: 0.3em 0 0; color: #78716c; font-size: 0.85em;">手机上直接访问</p>
+    </div>
+
+  </div>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 常见问题 ============= -->
+<div style="background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #be123c;">❓ 常见问题</h2>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：LobeChat 跟 ChatGPT 网页版比有什么优势？</p>
+    <p style="margin: 0; color: #64748b;">A：最大的优势是「自由」。你可以随时切换不同模型做对比，内置了插件系统（联网搜索、画图、图表），还有知识库功能，可以把文档上传给它让它学习。这些 ChatGPT 网页版都不具备。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：Docker 部署需要什么配置？</p>
+    <p style="margin: 0; color: #64748b;">A：要求很低，1GB 内存的服务器就够。LobeChat 本身只是一个前端界面，实际的 AI 推理在你中转 API 那边跑。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：Vercel 免费版够用吗？</p>
+    <p style="margin: 0; color: #64748b;">A：够用。Vercel 免费版每月 100GB 带宽和 100 小时运行时长，个人日常使用绰绰有余。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：部署完了但是连不上模型，报错怎么办？</p>
+    <p style="margin: 0; color: #64748b;">A：检查两个地方：1) API 地址末尾是不是有 /v1；2) API Key 有没有填对。大部分问题都是这两个原因。还有问题可以直接问我。</p>
+  </div>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); margin: 2em 0;">
+
+<!-- ============= 结尾动作 ============= -->
+<div style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); border-radius: 20px; padding: 2.5em 2em; margin: 2em 0; text-align: center; color: #fff;">
+  <h2 style="margin: 0 0 0.5em; font-size: 1.8em;">🚀 需要中转服务？</h2>
+  <p style="font-size: 1.1em; opacity: 0.9; margin: 0 0 1.5em;">提供 LobeChat / Cursor / Claude Code 等工具的中转 API Key</p>
+  <p style="font-size: 1em; opacity: 0.75;">支持 GPT-4o · Claude Sonnet · DeepSeek · Gemini · 全模型</p>
+  <p style="font-size: 0.9em; opacity: 0.65; margin-top: 1.5em;">👇 扫码或加微信联系</p>
+  <p style="font-size: 1.2em; font-weight: bold; margin-top: 0.5em;">微信：XXX-XXXX-XXXX</p>
+</div>

@@ -1,0 +1,306 @@
+/* ─── Chapter 3: Demo — Software Configuration ─── */
+
+.de-section-title {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.de-annotation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* ═══ Step 0: Universal formula ═══ */
+.de-step0 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 36px;
+  opacity: 0;
+  animation: deFadeIn 0.6s ease-out forwards;
+}
+
+.de-formula {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.de-formula-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 32px;
+  border: 2px solid var(--rule);
+  background: var(--surface);
+  min-width: 140px;
+}
+
+.de-formula-icon {
+  font-size: 32px;
+}
+
+.de-formula-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.de-formula-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
+  background: none;
+  padding: 0;
+  text-align: center;
+}
+
+.de-formula-plus {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--text-faint);
+}
+
+/* ═══ Step 1: ChatBox ═══ */
+.de-step1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 28px;
+  opacity: 0;
+  animation: deFadeIn 0.6s ease-out forwards;
+}
+
+/* ═══ Step 2: Cursor ═══ */
+.de-step2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 28px;
+  opacity: 0;
+  animation: deFadeIn 0.6s ease-out forwards;
+}
+
+/* Shared panel */
+.de-panel {
+  width: 520px;
+  border: 2px solid var(--rule);
+  background: var(--surface);
+}
+
+.de-panel--wide {
+  width: 640px;
+}
+
+.de-panel-header {
+  padding: 12px 20px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.de-panel-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.de-panel-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.de-row-label {
+  width: 140px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.de-row-value {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.de-row-value--code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 6px 10px;
+  background: var(--shell);
+  border: 1px solid var(--rule);
+}
+
+.de-row-value--accent {
+  color: var(--accent);
+}
+
+.de-tag {
+  padding: 4px 10px;
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.de-tag--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.de-toggle {
+  display: inline-block;
+  padding: 2px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.de-toggle--on {
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+/* Cursor two-column layout */
+.de-cursor-layout {
+  display: flex;
+  min-height: 240px;
+}
+
+.de-cursor-sidebar {
+  width: 160px;
+  background: var(--surface-2);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+}
+
+.de-cursor-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-mute);
+}
+
+.de-cursor-menu {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.de-cursor-menu-item {
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-2);
+  cursor: default;
+}
+
+.de-cursor-menu-item--active {
+  color: var(--text);
+  background: var(--surface-3);
+  border-left: 3px solid var(--accent);
+}
+
+.de-cursor-content {
+  flex: 1;
+}
+
+.de-cursor-section {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.de-cursor-section-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ═══ Step 3: Python ═══ */
+.de-step3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 28px;
+  opacity: 0;
+  animation: deFadeIn 0.6s ease-out forwards;
+}
+
+.de-editor {
+  width: 620px;
+  border: 2px solid var(--rule);
+  background: var(--shell);
+  overflow: hidden;
+}
+
+.de-editor-bar {
+  padding: 10px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.de-editor-filename {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.de-editor-content {
+  margin: 0;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.de-editor-content code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-2);
+  white-space: pre;
+}
+
+/* ─── Keyframes ─── */
+@keyframes deFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

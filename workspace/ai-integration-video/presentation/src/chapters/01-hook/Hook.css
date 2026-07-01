@@ -1,0 +1,230 @@
+/* ─── Hook Chapter ─── */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;500;700&display=swap");
+
+/* ═══ Step 0: Hook — pain point ═══ */
+.hk-step0 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 32px;
+}
+
+/* App cards row */
+.hk-apps-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.hk-app-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: var(--surface-2);
+  border: 2px dashed var(--rule);
+  position: relative;
+  opacity: 0;
+  animation: hkFadeIn 0.5s ease-out forwards;
+}
+
+.hk-app-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.hk-app-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hk-app-q {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--shell);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: hkPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+}
+
+/* Headline */
+.hk-headline {
+  font-family: var(--font-display-cn);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.2;
+  margin: 0;
+  opacity: 0;
+  animation: hkFadeIn 0.6s ease-out 0.8s forwards;
+}
+
+/* Blueprint drafting underline */
+.hk-blueprint-line {
+  width: 120px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  opacity: 0;
+  animation: hkFadeIn 0.4s ease-out 1.1s forwards;
+}
+
+.hk-blueprint-line--center {
+  margin: 0 auto;
+}
+
+/* Sub text */
+.hk-sub {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-2);
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  animation: hkFadeIn 0.5s ease-out 1.3s forwards;
+}
+
+/* ═══ Step 1: Solution — unified ═══ */
+.hk-step1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 28px;
+}
+
+/* Hero number + label */
+.hk-hero-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  opacity: 0;
+  animation: hkFadeIn 0.6s ease-out forwards;
+}
+
+.hk-num {
+  font-size: 140px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+}
+
+.hk-num-label {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  color: var(--text-2);
+  font-weight: 300;
+}
+
+/* Solution headline */
+.hk-solution {
+  font-family: var(--font-display-cn);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin: 0;
+  opacity: 0;
+  animation: hkFadeIn 0.6s ease-out 0.3s forwards;
+}
+
+/* Endpoint display */
+.hk-endpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 36px;
+  background: var(--surface-2);
+  border: 2px solid var(--rule);
+  opacity: 0;
+  animation: hkFadeIn 0.5s ease-out 0.6s forwards;
+}
+
+.hk-endpoint-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hk-endpoint-code {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Checkmark row */
+.hk-check-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: hkFadeIn 0.5s ease-out 0.9s forwards;
+}
+
+.hk-check-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-2);
+  opacity: 0;
+  animation: hkFadeIn 0.3s ease-out forwards;
+}
+
+.hk-check-icon {
+  flex-shrink: 0;
+}
+
+/* ─── Keyframes ─── */
+@keyframes hkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hkPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

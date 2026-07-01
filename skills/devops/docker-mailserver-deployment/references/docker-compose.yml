@@ -1,0 +1,111 @@
+# docker-mailserver + SnappyMail 完整部署示例
+
+## docker-compose.yml
+
+```yaml
+services:
+  mailserver:
+    image: mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: mail
+    domainname: aklibk.com
+    restart: always
+    ports:
+      - "127.0.0.1:25:25"
+      - "127.0.0.1:143:143"
+      - "127.0.0.1:587:587"
+      - "127.0.0.1:993:993"
+    volumes:
+      - ./data:/var/mail
+      - ./config:/tmp/docker-mailserver
+      - ./state:/var/mail-state
+      - ./logs:/var/log/mail
+    environment:
+      - ENABLE_SPAMASSASSIN=0
+      - ENABLE_CLAMAV=0
+      - ENABLE_FAIL2BAN=0
+      - ENABLE_POSTGREY=0
+      - SSL_TYPE=snakeoil
+      - TZ=Asia/Shanghai
+      - POSTMASTER_ADDRESS=admin@aklibk.com
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    networks:
+      - mailnet
+
+  webmail:
+    image: ghcr.io/the-djmaze/snappymail:latest
+    container_name: snappymail
+    restart: always
+    ports:
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - ./snappymail:/snappymail/data
+    environment:
+      - TZ=Asia/Shanghai
+    depends_on:
+      - mailserver
+    networks:
+      - mailnet
+
+networks:
+  mailnet:
+    driver: bridge
+```
+
+## 创建管理员账号
+
+```bash
+docker exec mailserver setup email add admin@aklibk.com NewApi2024
+docker restart mailserver
+```
+
+## 生成 DKIM
+
+```bash
+docker exec mailserver setup config dkim
+cat /opt/mailserver/config/opendkim/keys/aklibk.com/mail.txt
+```
+
+DKIM 值中的 TXT 记录内容添加到 Cloudflare DNS。
+
+## Nginx 配置（1Panel OpenResty）
+
+```nginx
+server {
+    listen 80;
+    server_name mail.aklibk.com;
+    client_max_body_size 50m;
+    location / {
+        proxy_pass http://127.0.0.1:8888;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+## Cloudflare DNS 记录
+
+| Type | Name | Value | Proxied |
+|------|------|-------|---------|
+| A | mail | 149.104.8.237 | No |
+| MX | @ | mail.aklibk.com (priority 10) | - |
+| TXT | @ | v=spf1 mx a:mail.aklibk.com ip4:149.104.8.237 ~all | - |
+| TXT | mail._domainkey | (from DKIM file) | - |
+
+## New-API 邮件配置
+
+在后台 → 系统设置 → 邮件设置：
+
+| 参数 | 值 |
+|------|-----|
+| SMTP 主机 | 127.0.0.1 |
+| SMTP 端口 | 25 |
+| 发件地址 | admin@aklibk.com |
+| 用户名/密码 | 留空（本地免认证） |

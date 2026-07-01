@@ -1,0 +1,59 @@
+对外项目域名列表 & 搜索引擎提交指南
+====================================
+整理时间：2026-06-29
+服务器：VPS1 (Akile HK) 149.104.8.237 / VPS2 (野草云监控) 38.55.194.79
+
+一、aklibk.com（主站 · 10 个对外项目）
+-------------------------------------
+
+  blog.aklibk.com       Halo 博客系统              VPS1  Cloudflare ✅
+  shop.aklibk.com       Dujiao-Next 数字商品商城     VPS1  Cloudflare ✅
+  shop-admin.aklibk.com Dujiao-Next 商城管理后台     VPS1  Cloudflare ✅
+  pan.aklibk.com        Cloudreve 云盘系统          VPS1  Cloudflare ✅
+  nav.aklibk.com        Sun-Panel 导航页            VPS1  Cloudflare ✅
+  n8n.aklibk.com        n8n 工作流自动化平台         VPS1  Cloudflare ✅
+  studio.aklibk.com     工作室展示页（静态 SPA）      VPS1  Cloudflare ✅
+  mail.aklibk.com       SnappyMail 网页邮箱          VPS1  DNS Only
+  uptime.aklibk.com     Uptime-Kuma 服务监控         VPS2  Cloudflare ✅
+  umami.aklibk.com      Umami 网站统计分析           VPS2  Cloudflare ✅
+
+二、wf1.one（工具 · 4 个对外项目）
+---------------------------------
+
+  api.wf1.one           New-API AI API 中转站       VPS1  Cloudflare ✅
+  xboard.wf1.one        XBoard 管理面板             VPS1  Cloudflare ✅
+  telegram.wf1.one      TelegramMonitor 消息监控     VPS1  Cloudflare ✅
+  status.wf1.one        Komari 系统状态页            VPS2  Cloudflare ✅
+
+三、站点地图状态
+---------------
+
+  blog.aklibk.com  sitemap.xml  HTTP 200  9+ 个 URL（文章/分类/标签/页面）
+  shop.aklibk.com  sitemap.xml  HTTP 200  11 个 URL（商品/分类/政策页）
+  api.wf1.one      无站点地图（管理后台，无需收录）
+
+四、搜索引擎提交指南
+-------------------
+
+1. Google Search Console
+   https://search.google.com/search-console
+   添加 shop.aklibk.com / blog.aklibk.com → 验证所有权
+   Sitemaps → 提交 sitemap.xml
+   robots.txt 已声明 sitemap，自动发现
+
+2. Bing Webmaster Tools
+   https://www.bing.com/webmaster
+   可用 Google Search Console 导入
+   shop.aklibk.com 已验证（BingSiteAuth.xml 已上传）
+
+3. 百度站长沙龙
+   https://ziyuan.baidu.com
+   添加站点 → 验证所有权 → 提交站点地图
+
+4. 搜狗站长平台
+   https://zhanzhang.sogou.com
+   添加站点 → 验证所有权 → 提交站点地图
+
+5. 360站长平台
+   https://zhanzhang.so.com
+   添加站点 → 验证所有权 → 提交站点地图

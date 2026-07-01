@@ -1,0 +1,67 @@
+{
+  "updated_at": "2026-07-01T15:31:47.539350",
+  "platforms": {
+    "telegram": [],
+    "discord": [],
+    "whatsapp": [],
+    "slack": [],
+    "signal": [],
+    "mattermost": [],
+    "matrix": [],
+    "homeassistant": [],
+    "email": [],
+    "sms": [],
+    "dingtalk": [],
+    "msgraph_webhook": [],
+    "feishu": [
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c",
+        "type": "dm",
+        "thread_id": null
+      },
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c:om_x100b6c8d8065c448c25ab2a04d5a97c",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c / topic om_x100b6c8d8065c448c25ab2a04d5a97c",
+        "type": "dm",
+        "thread_id": "om_x100b6c8d8065c448c25ab2a04d5a97c"
+      },
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c:om_x100b6b25604aeca4c4f695bb9bef4cf",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c / topic om_x100b6b25604aeca4c4f695bb9bef4cf",
+        "type": "dm",
+        "thread_id": "om_x100b6b25604aeca4c4f695bb9bef4cf"
+      },
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c:omt_19249a21500f5be3",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c / topic omt_19249a21500f5be3",
+        "type": "dm",
+        "thread_id": "omt_19249a21500f5be3"
+      },
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c:om_x100b6b20b74d4d34c24ff31e5bf556e",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c / topic om_x100b6b20b74d4d34c24ff31e5bf556e",
+        "type": "dm",
+        "thread_id": "om_x100b6b20b74d4d34c24ff31e5bf556e"
+      },
+      {
+        "id": "oc_474cfa5eb8abd3ca4d4854fca4a1044c:om_x100b6b22637894a0c36710573fae1fe",
+        "name": "oc_474cfa5eb8abd3ca4d4854fca4a1044c / topic om_x100b6b22637894a0c36710573fae1fe",
+        "type": "dm",
+        "thread_id": "om_x100b6b22637894a0c36710573fae1fe"
+      }
+    ],
+    "wecom": [],
+    "wecom_callback": [],
+    "weixin": [],
+    "bluebubbles": [],
+    "qqbot": [],
+    "yuanbao": [],
+    "google_chat": [],
+    "irc": [],
+    "line": [],
+    "ntfy": [],
+    "simplex": [],
+    "teams": []
+  }
+}

@@ -1,0 +1,149 @@
+/* ─── Chapter 4: Outro ─── */
+
+.ou-section-title {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.ou-headline {
+  font-family: var(--font-display-cn);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ou-headline--accent {
+  color: var(--accent);
+}
+
+/* ═══ Step 0: App grid ═══ */
+.ou-step0 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 32px;
+  opacity: 0;
+  animation: ouFadeIn 0.6s ease-out forwards;
+}
+
+.ou-apps-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  max-width: 640px;
+}
+
+.ou-app-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 22px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  opacity: 0;
+  animation: ouFadeIn 0.35s ease-out forwards;
+}
+
+.ou-app-icon {
+  font-size: 28px;
+}
+
+.ou-app-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-2);
+  letter-spacing: 0.05em;
+}
+
+.ou-divider {
+  width: 160px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  opacity: 0.5;
+}
+
+.ou-blog-link {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.ou-blog-link code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--accent);
+  background: none;
+  padding: 0;
+}
+
+/* ═══ Step 1: CTA ═══ */
+.ou-step1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 36px;
+  opacity: 0;
+  animation: ouFadeIn 0.6s ease-out forwards;
+}
+
+.ou-cta-card {
+  padding: 24px 36px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+}
+
+.ou-cta-url {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--accent);
+  background: none;
+  padding: 0;
+}
+
+.ou-footer-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.ou-end-mark {
+  width: 60px;
+  height: 60px;
+  border: 2px dashed var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.ou-end-mark::after {
+  content: "■";
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--accent);
+}
+
+/* ─── Keyframes ─── */
+@keyframes ouFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,152 @@
+# Dujiao-Next 配置文件 — PostgreSQL + Redis
+
+app:
+  secret_key: 320794a55e4a9caa00556f94f9472131 # 务必修改，用于 AES-256 加密敏感数据
+  totp_issuer: Dujiao-Next                          # 后台 2FA 验证器中显示的发行方名称
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  mode: release  # debug 或 release
+
+log:
+  dir: ""  # 为空时使用当前运行目录/logs
+  filename: app.log
+  max_size_mb: 100
+  max_backups: 7
+  max_age_days: 30
+  compress: true
+
+database:
+  driver: postgres  # sqlite / postgres
+  dsn: host=postgres user=dujiao password=1f4e200084bbe35bdfa6 dbname=dujiao_next port=5432 sslmode=disable TimeZone=Asia/Shanghai
+  pool:
+    max_open_conns: 25
+    max_idle_conns: 10
+    conn_max_lifetime_seconds: 3600
+    conn_max_idle_time_seconds: 300
+
+jwt:
+  secret: 2Pyt_z7xi6bsAsWM8hjU2ONYEAxENHSbXmN-rOxF0V74jhDhmyj0kAtrGonfWRSQ
+  expire_hours: 24  # Token 有效期（小时）
+
+user_jwt:
+  secret: F8XSHgYf-PGPH3u-7iBnKXv7W73tykbjcHKSUI9ldihVuWDVZaWbFib9B0W80vRo
+  expire_hours: 24  # 用户 Token 有效期（小时）
+  remember_me_expire_hours: 168  # 记住我 Token 有效期（小时）
+
+bootstrap:
+  default_admin_username: ""  # 首次初始化管理员用户名（可选，优先使用环境变量）
+  default_admin_password: ""  # 首次初始化管理员密码
+
+telegram_auth:
+  enabled: false
+  bot_username: ""
+  bot_token: ""
+  client_secret: ""
+  oidc_redirect_uri: ""
+  mini_app_url: ""
+  login_expire_seconds: 300
+  replay_ttl_seconds: 300
+
+redis:
+  enabled: true
+  host: redis
+  port: 6379
+  password: 0f9f4bf5376388d0accd
+  db: 0
+  prefix: "dj"
+
+queue:
+  enabled: true
+  host: redis
+  port: 6379
+  password: 0f9f4bf5376388d0accd
+  db: 1
+  concurrency: 10
+  queues:
+    default: 10
+    critical: 5
+  upstream_sync_interval: "5m"
+
+upload:
+  max_size: 10485760
+  allowed_types:
+    - image/jpeg
+    - image/png
+    - image/gif
+    - image/webp
+    - image/svg+xml
+  allowed_extensions:
+    - .jpg
+    - .jpeg
+    - .png
+    - .gif
+    - .webp
+    - .svg
+  max_width: 4096
+  max_height: 4096
+
+cors:
+  allowed_origins:
+    - "*"
+  allowed_methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed_headers:
+    - Content-Type
+    - Content-Length
+    - Accept-Encoding
+    - Authorization
+    - Cache-Control
+    - X-Requested-With
+    - X-CSRF-Token
+  allow_credentials: true
+  max_age: 600
+
+security:
+  login_rate_limit:
+    window_seconds: 300
+    max_attempts: 5
+    block_seconds: 900
+  password_policy:
+    min_length: 8
+    require_upper: true
+    require_lower: true
+    require_number: true
+    require_special: false
+
+email:
+  enabled: false
+  host: smtp.xxx.com
+  port: 465
+  username: ""
+  password: ""
+  from: ""
+  from_name: ""
+  use_tls: false
+  use_ssl: true
+  verify_code:
+    expire_minutes: 10
+    send_interval_seconds: 60
+    max_attempts: 5
+    length: 6
+
+order:
+  payment_expire_minutes: 15
+  max_refund_days: 30
+
+reseller:
+  enabled: false
+  main_hosts:
+    - localhost
+    - 127.0.0.1
+    - "::1"
+  trusted_forwarded_host: false
+  subdomain_base: ""
+  self_apply_enabled: true
+  settlement_confirm_days: 7

@@ -1,0 +1,56 @@
+# Secrets (CRITICAL - never push)
+.env
+.env.*
+**/.env
+**/.env.*
+secrets/
+
+# SSH keys + GPG
+*.pem
+*.key
+*.pub
+id_*
+*.keypair
+known_hosts
+authorized_keys
+.ssh/
+
+# Tokens / certs
+*.token
+*.secret
+*.cert
+*.crt
+
+# Python venv + cache
+home/halo-mcp-env/
+home/.cache/
+home/.local/share/uv/
+home/.local/state/uv/
+home/.local/share/tirith/
+
+# Node
+home/.npm/
+home/.npm-global/
+
+# System cache
+.cache/
+.local/
+
+# Logs (may contain tokens)
+logs/
+*.log
+*.log.*
+
+# Backup files
+*.bak
+*.bak-*
+*.tmp
+
+# Heavy data dirs we don't need
+audio_cache/
+image_cache/
+kanban.db*
+*.sqlite
+*.sqlite3
+*.db
+plugins/hermes-internal/

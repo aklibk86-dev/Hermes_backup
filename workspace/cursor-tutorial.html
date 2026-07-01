@@ -1,0 +1,205 @@
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 3em 2em; margin: 2em 0; text-align: center; color: #fff;">
+  <h1 style="font-size: 2.2em; margin: 0 0 0.3em;">🖥️ Cursor 免费续杯</h1>
+  <p style="font-size: 1.3em; opacity: 0.95; margin: 0;">用你自己的 API Key 替代官方订阅，省掉 $20/月</p>
+  <p style="font-size: 0.9em; opacity: 0.7; margin-top: 1.5em;">兼容 GPT-4o / Claude Sonnet / DeepSeek / 全模型</p>
+</div>
+
+<p>Cursor 确实好用，但 $20/月说实话不便宜。尤其是重度用户，每个月用到次数上限之后要么等、要么再掏钱升级 Pro。</p>
+
+<p>其实 Cursor 是支持自定义 API 的，只要改一个配置文件就行。改完之后：</p>
+
+<ul>
+  <li>不用买 Cursor 官方订阅，用自己的 API Key 走中转</li>
+  <li>所有模型（GPT-4o、Claude Sonnet、DeepSeek 等）都能在 Cursor 里用</li>
+  <li>按量付费，用到多少算多少，价格是官方的 1/5 甚至更低</li>
+</ul>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 第一步 ============= -->
+<div style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #0369a1;">📋 第一步：准备中转 API 地址和 Key</h2>
+  <p style="color: #075985;">你需要一个兼容 OpenAI 格式的 API 中转服务，包含：</p>
+  <ul style="color: #075985;">
+    <li><strong>API 地址</strong>：比如 <code style="background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 4px;">https://api.wf1.one/v1</code></li>
+    <li><strong>API Key</strong>：一个 sk- 开头的密钥</li>
+    <li><strong>支持的模型</strong>：GPT-4o、Claude Sonnet、DeepSeek 等</li>
+  </ul>
+
+  <div style="background: #fff; border-left: 4px solid #0284c7; padding: 1em 1.5em; border-radius: 8px; margin-top: 1em;">
+    <p style="margin: 0; color: #475569;"><strong>💡 提示：</strong>如果没有中转服务，可以联系我帮你搭一个。</p>
+  </div>
+</div>
+
+<!-- 截图占位 1 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图1：API 中转后台 — 显示 API 地址和 Key 的位置】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 第二步 ============= -->
+<div style="background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #15803d;">⚙️ 第二步：打开 Cursor 设置</h2>
+  <ol style="color: #166534; padding-left: 1.5em;">
+    <li>打开 Cursor</li>
+    <li>点击左下角齿轮图标 ⚙️ → <strong>Settings</strong></li>
+    <li>或按快捷键 <kbd style="background: #16a34a; color: #fff; padding: 2px 10px; border-radius: 4px;">Cmd/Ctrl + Shift + J</kbd> 直接打开</li>
+  </ol>
+</div>
+
+<!-- 截图占位 2 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图2：Cursor 设置页面入口位置】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 第三步 ============= -->
+<div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #b45309;">🔑 第三步：找到 Models 配置项</h2>
+  <ol style="color: #92400e; padding-left: 1.5em;">
+    <li>在 Settings 左侧菜单找到 <strong>Models</strong></li>
+    <li>往下滑到底部，找到 <strong>Override OpenAI Base URL</strong></li>
+    <li>填入你的中转地址，例如：<code style="background: #d97706; color: #fff; padding: 2px 8px; border-radius: 4px;">https://api.wf1.one/v1</code></li>
+  </ol>
+</div>
+
+<!-- 截图占位 3 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图3：Models 设置页面的 Override OpenAI Base URL 输入框】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 第四步 ============= -->
+<div style="background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #7e22ce;">🚀 第四步：填入 API Key 并保存</h2>
+  <ol style="color: #6b21a8; padding-left: 1.5em;">
+    <li>在同一页面找到 <strong>API Key</strong> 输入框</li>
+    <li>填入你的中转 Key（sk- 开头的字符串）</li>
+    <li>点击 <strong>Save</strong> 保存配置</li>
+    <li>重启 Cursor 即可生效 🎉</li>
+  </ol>
+</div>
+
+<!-- 截图占位 4 -->
+<div style="background: #f1f5f9; border: 2px dashed #94a3b8; border-radius: 12px; padding: 3em 2em; text-align: center; margin: 1.5em 0;">
+  <span style="font-size: 2em;">🖼️</span>
+  <p style="color: #64748b; margin: 0.5em 0 0; font-size: 0.9em;">【这里放截图4：API Key 填写和保存的界面】</p>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 配置建议 ============= -->
+<div style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #d97706;">💡 模型推荐配置</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin-top: 1em;">
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a;">
+      <h3 style="margin: 0 0 0.3em; color: #92400e;">✏️ 代码补全</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">GPT-4o-mini</p>
+      <p style="margin: 0.3em 0 0; color: #a8a29e; font-size: 0.8em;">速度快又便宜</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a;">
+      <h3 style="margin: 0 0 0.3em; color: #92400e;">💬 Chat 问答</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">Claude Sonnet 或 GPT-4o</p>
+      <p style="margin: 0.3em 0 0; color: #a8a29e; font-size: 0.8em;">效果最好</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a;">
+      <h3 style="margin: 0 0 0.3em; color: #92400e;">🤖 Agent 模式</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">Claude Sonnet</p>
+      <p style="margin: 0.3em 0 0; color: #a8a29e; font-size: 0.8em;">推理能力强</p>
+    </div>
+
+    <div style="background: #fff; border-radius: 12px; padding: 1.2em; border: 1px solid #fde68a;">
+      <h3 style="margin: 0 0 0.3em; color: #92400e;">🔎 深度搜索</h3>
+      <p style="margin: 0; color: #78716c; font-size: 0.9em;">DeepSeek R1 / V3</p>
+      <p style="margin: 0.3em 0 0; color: #a8a29e; font-size: 0.8em;">性价比极高</p>
+    </div>
+
+  </div>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 费用对比 ============= -->
+<div style="background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #059669;">💰 费用对比：官方 vs 中转</h2>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 1em; background: #fff; border-radius: 12px; overflow: hidden;">
+    <thead>
+      <tr style="background: #059669; color: #fff;">
+        <th style="padding: 12px 16px; text-align: left;">项目</th>
+        <th style="padding: 12px 16px; text-align: center;">官方订阅</th>
+        <th style="padding: 12px 16px; text-align: center;">中转方案</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 12px 16px;">月费</td>
+        <td style="padding: 12px 16px; text-align: center; color: #ef4444;">$20</td>
+        <td style="padding: 12px 16px; text-align: center; color: #059669;">按量，重度约 $3-5</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 12px 16px;">可用模型</td>
+        <td style="padding: 12px 16px; text-align: center;">有限制</td>
+        <td style="padding: 12px 16px; text-align: center;">全模型可用</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #e2e8f0;">
+        <td style="padding: 12px 16px;">流量限制</td>
+        <td style="padding: 12px 16px; text-align: center;">有上限</td>
+        <td style="padding: 12px 16px; text-align: center;">无上限</td>
+      </tr>
+      <tr>
+        <td style="padding: 12px 16px;">多人共享</td>
+        <td style="padding: 12px 16px; text-align: center;">不支持</td>
+        <td style="padding: 12px 16px; text-align: center;">一个 Key 多人同时用</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 常见问题 ============= -->
+<div style="background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 100%); border-radius: 16px; padding: 2em; margin: 2em 0;">
+  <h2 style="margin-top: 0; color: #be123c;">❓ 常见问题</h2>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：配置了之后 Cursor 自带的模型还能用吗？</p>
+    <p style="margin: 0; color: #64748b;">A：能。配置了中转地址之后，你既可以用官方模型（如果还有额度），也可以用中转的模型，两者不冲突。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：中转的 Key 安全吗？</p>
+    <p style="margin: 0; color: #64748b;">A：中转服务只转发你的请求到官方 API，不会存储你的对话内容。选择靠谱的服务商就行。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em; margin-bottom: 1em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：速度会比官方慢吗？</p>
+    <p style="margin: 0; color: #64748b;">A：香港节点直连，延迟很低。实际体验和官方几乎没有差别。中转还能走 CDN 加速，部分地区反而更快。</p>
+  </div>
+
+  <div style="background: #fff; border-radius: 12px; padding: 1.2em;">
+    <p style="margin: 0 0 0.3em; font-weight: bold; color: #1e293b;">Q：用中转会被封 Cursor 账号吗？</p>
+    <p style="margin: 0; color: #64748b;">A：不会。Cursor 官方就提供了这个设置项，是合法的配置方式。你只是改了 API 地址而已，跟改代理地址是一个意思。</p>
+  </div>
+</div>
+
+<hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 2em 0;">
+
+<!-- ============= 结尾动作 ============= -->
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 2.5em 2em; margin: 2em 0; text-align: center; color: #fff;">
+  <h2 style="margin: 0 0 0.5em; font-size: 1.8em;">🚀 需要中转服务？</h2>
+  <p style="font-size: 1.1em; opacity: 0.9; margin: 0 0 1.5em;">提供 Cursor / Claude Code / LobeChat 等工具的中转 API Key</p>
+  <p style="font-size: 1em; opacity: 0.75;">支持 GPT-4o · Claude Sonnet · DeepSeek · Gemini · 全模型</p>
+  <p style="font-size: 0.9em; opacity: 0.65; margin-top: 1.5em;">👇 扫码或加微信联系</p>
+  <p style="font-size: 1.2em; font-weight: bold; margin-top: 0.5em;">微信：XXX-XXXX-XXXX</p>
+</div>

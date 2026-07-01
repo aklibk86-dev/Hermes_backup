@@ -1,0 +1,9 @@
+{
+  "last_report_path": "/opt/data/logs/curator/20260627-201935",
+  "last_run_at": "2026-06-27T20:19:35.268753+00:00",
+  "last_run_duration_seconds": 247.12762,
+  "last_run_summary": "auto: no changes; llm: Here's the consolidation report.\n\n---\n\n## Consolidation Report\n\n### Clusters Processed\n\n**Cluster 1: Domain Checking** — `bulk-domain-availability` → `domain-checking`\nBoth skills covered identical raw-socket WHOIS checking, the same domain…\narchived 12 skill(s):\n  • ai-api-relay → api-relay-management\n  • bulk-domain-availability → domain-checking\n  • apple-notes — pruned (stale)\n  • apple-reminders — pruned (stale)\n  • feishu-automation — pruned (stale)\n  • feishu-cli — pruned (stale)\n  • feishu-drive-cli — pruned (stale)\n  • feishu-knowledge-base — pruned (stale)\n  • findmy — pruned (stale)\n  • imessage — pruned (stale)\n  … and 2 more\nfull report: hermes curator status\nkeep an umbrella stable: hermes curator pin api-relay-management",
+  "last_run_summary_shown_at": null,
+  "paused": false,
+  "run_count": 1
+}
