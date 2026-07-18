@@ -40,6 +40,10 @@ if [ -d "$MEMORIES_DIR" ]; then
     cp -r "$MEMORIES_DIR" memories/
 fi
 
+# 脱敏：备份前清除记忆文件中的敏感凭证（PAT、密钥等）
+# 防止 GitHub Push Protection 阻断提交
+sed -i 's/GitHub PAT (ghp_[^ ]*)/GitHub PAT [REDACTED - stored in environment]/g' memories/USER.md 2>/dev/null || true
+
 # 生成备份清单
 cat > BACKUP_MANIFEST.md << 'EOF'
 # Hermes 备份清单

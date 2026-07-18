@@ -69,7 +69,26 @@ vercel deploy --prod --yes --token YOUR_TOKEN
 
 The first deploy creates a Vercel project and returns a production URL.
 
-### 4. Subsequent Deploys
+### 4. Redeploy to an Existing Project (from a Different Directory)
+
+When deploying from a fresh clone (not the original local project directory), create a `.vercel/project.json` to link to the existing Vercel project:
+
+```bash
+# 1. Get the existing project info
+vercel project ls --token YOUR_TOKEN
+# Note the project name or ID
+
+# 2. Create the linking file
+mkdir -p .vercel
+echo '{"projectId":"prj_XXXXXXXXXXXXX","orgId":"team_XXXXXXXXXXXXXXXXX","projectName":"PROJECT_NAME"}' > .vercel/project.json
+
+# 3. Deploy (Vercel reuses existing project settings + env vars)
+vercel deploy --prod --yes --token YOUR_TOKEN
+```
+
+This is useful when building on a different machine (e.g. VPS) and deploying from a local sandbox. The `.vercel/project.json` tells Vercel which project this deployment belongs to, preserving environment variables and domain settings.
+
+### 5. Subsequent Deploys (from Original Directory)
 
 ```bash
 cd /path/to/project-root
@@ -254,7 +273,32 @@ curl -s "https://api.cloudflare.com/client/v4/zones/ZONE_ID/dns_records?type=A&n
   -H "X-Auth-Key: YOUR_GLOBAL_API_KEY"
 ```
 
-> **Note**: Vercel requires `proxied: false` (gray cloud) for CNAME records. Cloudflare proxy (orange cloud) is not compatible with Vercel's CNAME setup.
+> **Note**: Vercel requires `proxied: false` (gray cloud) for CNAME records during initial certificate issuance. Once the certificate is issued, you can re-enable Cloudflare proxy (orange cloud). See the "Vercel + Cloudflare Proxy" section below for the complete workflow.
+
+### Vercel + Cloudflare Proxy (Orange Cloud)
+
+When using Cloudflare proxy (orange cloud) with a Vercel-custom domain, Vercel's Let's Encrypt verification is blocked by the proxy. Follow these steps:
+
+```bash
+# Step 1: Disable Cloudflare proxy (grey cloud)
+curl -s -X PATCH "..." --data '{"proxied":false,"ttl":120}'
+
+# Step 2: Wait 5-10 seconds for DNS propagation
+
+# Step 3: Trigger Vercel certificate issuance
+vercel alias set PRODUCTION_URL your-domain.com --token YOUR_TOKEN
+
+# Step 4: Re-enable Cloudflare proxy (orange cloud)
+curl -s -X PATCH "..." --data '{"proxied":true,"ttl":1}'
+
+# Step 5: Set Cloudflare SSL to "Full" (NOT "Flexible")
+curl -s -X PATCH "https://api.cloudflare.com/client/v4/zones/ZONE_ID/settings/ssl" \
+  --data '{"value":"full"}'
+```
+
+> ⚠️ **SSL mode matters**: For Vercel behind Cloudflare proxy, use **Full** mode (not Flexible). Flexible makes CF connect via HTTP to Vercel, but Vercel redirects HTTP→HTTPS, creating a 308 redirect loop. Full mode uses Vercel's certificate directly. For VPS-hosted services (Nginx on port 80 only), use **Flexible** instead.
+
+> ⚠️ **Multi-level subdomains**: Cloudflare's universal SSL may not cover subdomains with internal dots (e.g. `admin.dujiao.aklibk.com`). Use flat subdomains: `dujiao-admin.aklibk.com`.
 
 ### Fixing Cloudflare 525 (SSL Handshake Failure)
 

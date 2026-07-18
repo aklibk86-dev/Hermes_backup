@@ -399,6 +399,20 @@ Cloudflare's universal SSL may not cover multi-level subdomains like `admin.duji
 - DON'T: `admin.dujiao.aklibk.com`
 - DO: `dujiao-admin.aklibk.com`
 
+## GitHub Pages Deployment
+
+Deploy pre-built static sites (VitePress, Hugo, plain HTML/CSS/JS) to GitHub Pages with Cloudflare custom domain.
+
+See `references/github-pages-deployment.md` for the full workflow:
+1. Build the project locally (`npm run build`)
+2. Create orphan `gh-pages` branch with built files
+3. Force push to GitHub
+4. Enable Pages via API
+5. Set custom CNAME domain via API
+6. Add Cloudflare CNAME record
+
+Key pitfall: **Order matters** — add Cloudflare CNAME first, then set custom domain via GitHub Pages API. GitHub Pages rejects the custom domain if the DNS doesn't resolve.
+
 ## Verification Checklist (Required Before Declaring "Done")
 
 After deploying or modifying any service, run ALL of these checks before telling the user it's working:
