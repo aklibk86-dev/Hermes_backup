@@ -1,17 +1,19 @@
-GitHub PAT (classic, 满权限): ghp_u5...07cpLu。Login=aklibk86-dev (id 226070156)。Scopes: admin:enterprise, admin:public_key, delete_repo, repo, user, workflow 等全有。验证: GET /user → 200。**所有 GitHub API 操作在 VPS1 (149.104.8.237) 跑**——沙箱写入 token 会被脱敏；用 base64 传输 + 文件读写。撤销: GitHub Settings → Developer settings → Personal access tokens → classic → Revoke。已用: 2026-07-01 删了 aklibk86-dev/Hermes_backup 仓库 + 所有 SSH keys。
+VPS1: 149.104.8.237:17422 root/kkeuBUGK8191. 4C/8G/50G, Debian 12. Docker v29.6.1. 1Panel OpenResty + GitHub gh CLI v2.23.0 已安装。gh CLI 待登录认证。
 §
-Cloudflare: Email 13180105117@163.com, key 76ab385916b3d0110d3dce4503eaf22fdcdd4 (Global API Key — 用 X-Auth-Email + X-Auth-Key 头，非 Bearer Token)。Zones: aklibk.com db8c625f55e3608e51b3b5481337a1b7, wf1.one 8ac66d14af8d5df62a46744f227f741f.
+Xboard on VPS1 port 7001, admin at /042c43df, admin@demo.com / 1ed8cf4a9d0d944abf7a342999db7120. Backend domains: XBoard.Wf1.one, xbtest/xbdemo/xbdev.aklibk.com.
 §
-For 1Panel-managed app DB passwords: they're masked as '***' everywhere but the real values live in running container env. Use `docker exec <container> printenv | grep -i pass` to retrieve them.
+GitHub: aklibk86-dev (id 226070156). Vercel account: wufengs-projects-81ec548b, token configured.
 §
-Halo 2.25.3 @ blog.aklibk.com. Admin: wufeng. halo-mcp-server v0.1.6 (~/halo-mcp-env). PAT in .env (962 chars). CRITICAL: content-json=true + Markdown content = editor crash. Content must be HTML snapshot via base/head/releaseSnapshot.
+VPS1 default operation host 149.104.8.237:17422 root/kkeuBUGK8191. Docker ports bind 127.0.0.1 only, behind Cloudflare + OpenResty. CRITICAL: Never modify backend Nginx configs without reading project docs first!
 §
-Xboard deployed on VPS. MariaDB container: xboard-mariadb. Xboard container: index-xboard-1 port 7001. Admin: XBoard.Wf1.one/26333405, admin@demo.com / 5bd83cd41a8bbcc58f8530863d15d897.
+Xboard deployed at /opt/Xboard on VPS1, port 7001, admin panel at /042c43df. Nginx vhosts via 1Panel OpenResty at /opt/1panel/www/conf.d/. Stellar theme (Xboard Vue frontend) deployed on Vercel project "stellar" under wufengs-projects-81ec548b, production URL stellar-gold.vercel.app, connected to GitHub aklibk86-dev/stellar for auto-deploy.
 §
-Uptime-Kuma port 3003 uptime.aklibk.com v2.4.0 key uk1_RBc4pTxujvHpAr-ueOjSYytIfARnCzmY9iPOENue. Sun-Panel port 3004 nav.aklibk.com admin@sun.cc/12345678.
+Cloudflare zones managed: aklibk.com (db8c625f55e3608e51b3b5481337a1b7), aklibk.wiki (d4e5c3a926cb0619ea9307330414d719), wf1.one (8ac66d14af8d5df62a46744f227f741f). Email: 13180105117@163.com.
 §
-VPS2 38.55.194.79 (野草云/监控): Debian 12, root/WuFeng@2016.., 2G/30G. Containers: umami(3002), umami-postgres, uptime-kuma(3003), komari(25774). Umami DB user=umami pwd=***, admin bcrypt. Sites tracked: shop.aklibk.com, blog.aklibk.com. umami.aklibk.com 域名现在无后端——Nginx原指向VPS1 Firecrawl，真实Umami在VPS2。
+User's model preference: DeepSeek V4 Flash via custom provider. Monthly API cost ~¥65 with 98% cache hit rate. Expects direct execution, no re-confirming. Prefers Chinese comments in configs.
 §
-飞鼠知识库 space_id=7654947950363217077, parent_node_token=TPVwwZlD6iTPjxk70qgc8oAanvf (首页节点)。lark-cli用户已授权wiki:node:create/wiki:node:move/wiki:space:write_only。创建知识库内文档用 lark-cli docs +create --api-version v2 --parent-token TPVwwZlD6iTPjxk70qgc8oAanvf --as user --doc-format markdown。bot无wiki权限。
+VPS1 Docker services: Uptime-Kuma (:3003), Umami (:3002), Sub2API (:8080, admin@sub2api.local/admin123456), Dujiao-Next (api:8080, user:8081, admin:8082, admin/admin123456), plan-wiki (:8888).
 §
-沙箱无 hermes CLI。`hermes skills install <n>` → SSH 到 VPS1 再 `docker exec 1Panel-hermes-agent-UZQ9 hermes skills install <n>`。clawhub 技能常被 quarantine（.env 外带危险），禁 --force。
+Vercel projects: stellar-vercel (stellar-demo.aklibk.com, env-var managed), stellar-docs (stellar.aklibk.wiki), config-gen (config.aklibk.com, no GitHub), telegram-bridge-docs (telebridge.aklibk.wiki), pocket-bio (www.aklibk.com).
+§
+aklibk.wiki DNS: config.aklibk.wiki (Vercel), plan.aklibk.wiki (VPS1 Docsify), stellar.aklibk.wiki (Vercel), telebridge.aklibk.wiki (Vercel telegram-bridge-docs).

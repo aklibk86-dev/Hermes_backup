@@ -27,8 +27,8 @@ if command -v gh &>/dev/null && gh auth status &>/dev/null; then
 else
   AUTH="git"
   if [ -z "$GITHUB_TOKEN" ]; then
-    if [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+    if _hermes_env="${HERMES_HOME:-$HOME/.hermes}/.env"; [ -f "$_hermes_env" ] && grep -q "^GITHUB_TOKEN=" "$_hermes_env"; then
+      GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" "$_hermes_env" | head -1 | cut -d= -f2 | tr -d '\n\r')
     elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
       GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials 2>/dev/null | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
     fi
@@ -501,65 +501,6 @@ for g in json.load(sys.stdin):
     print(f\"  {g['id']}  {g['description'] or '(no desc)':40}  {files}\")"
 ```
 
-## 11. Deleting Repositories
-
-**Required scope**: classic PAT must include `delete_repo`. Fine-grained PAT must have `Administration: Write` for the repo.
-
-**With gh:**
-
-```bash
-gh repo delete owner/repo-name --yes
-# Or from inside the repo's working directory:
-gh repo delete --yes
-```
-
-**With curl:**
-
-```bash
-# Delete the repo (204 = success, 404 = already gone)
-curl -s -X DELETE \
-  -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/$OWNER/$REPO \
-  -w "HTTP %{http_code}\n"
-
-# Verify it's gone
-curl -s -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/repos/$OWNER/$REPO \
-  -w "HTTP %{http_code} (expect 404)\n"
-```
-
-**Cleanup chain when removing a project / data repo** (validated July 2026):
-
-```bash
-# 1. Delete any SSH keys this project added to your GitHub account
-curl -s -H "Authorization: token $GITHUB_TOKEN" \
-  https://api.github.com/user/keys \
-  | python3 -c "import sys,json
-for k in json.load(sys.stdin):
-    if 'project-name' in k.get('title','').lower():
-        print(k['id'], k['title'])"
-
-# Then DELETE /user/keys/<id> for each one (use -X DELETE)
-
-# 2. Delete the repo itself (above)
-
-# 3. Clean local artifacts: .git/ directory, .gitignore, generated keys
-rm -rf .git .gitignore .ssh/<project>_backup .ssh/<project>_backup.pub
-ls -la ~/.ssh/  # confirm
-```
-
-**Important pitfalls** (validated July 2026):
-
-- **Empty-repo vs repo-not-exist diagnostic trap**: `git ls-remote git@github.com:owner/repo.git` returns EMPTY output + exit 0 in BOTH cases — repo doesn't exist, AND repo exists but has no commits. Before chasing a "key not authorized" rabbit hole, verify with `curl -sI https://api.github.com/repos/owner/repo | head -1` — 404 = fix the name or create the repo, not the key. (Full disambiguation procedure in `github-auth` skill.)
-- **GitHub secret scanning blocks push with 403, not 422**: If your initial commit contains secrets (`.env` values, log lines with API tokens, even filenames matching known patterns), GitHub's push protection REJECTS the push before any data lands. Remote error looks like:
-  ```
-  remote: - Push cannot contain secrets
-  remote:   —— Lark Application Secret ——
-  remote:   locations: commit:abc..., path:.env:5
-  ```
-  Fix: ensure `.gitignore` excludes these paths BEFORE `git add`, then rebuild history (delete the .git directory and re-init). Don't try to remove individual files — `git rm --cached` only marks them, the secret content remains in history.
-- **PAT `delete_repo` scope required**: classic PATs must explicitly include `delete_repo` — it's NOT part of the default `repo` scope. Generate a fresh token if you see 404 on a repo you know exists, or 403 with "Must have admin rights".
-
 ## Quick Reference Table
 
 | Action | gh | git + curl |
@@ -569,7 +510,6 @@ ls -la ~/.ssh/  # confirm
 | Fork | `gh repo fork o/r --clone` | `curl POST /repos/o/r/forks` + `git clone` |
 | Repo info | `gh repo view o/r` | `curl GET /repos/o/r` |
 | Edit settings | `gh repo edit --...` | `curl PATCH /repos/o/r` |
-| **Delete repo** | **`gh repo delete o/r --yes`** | **`curl -X DELETE /repos/o/r`** |
 | Create release | `gh release create v1.0` | `curl POST /repos/o/r/releases` |
 | List workflows | `gh workflow list` | `curl GET /repos/o/r/actions/workflows` |
 | Rerun CI | `gh run rerun ID` | `curl POST /repos/o/r/actions/runs/ID/rerun` |

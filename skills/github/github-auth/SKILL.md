@@ -220,8 +220,8 @@ if command -v gh &>/dev/null && gh auth status &>/dev/null; then
   echo "AUTH_METHOD=gh"
 elif [ -n "$GITHUB_TOKEN" ]; then
   echo "AUTH_METHOD=curl"
-elif [ -f ~/.hermes/.env ] && grep -q "^GITHUB_TOKEN=" ~/.hermes/.env; then
-  export GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" ~/.hermes/.env | head -1 | cut -d= -f2 | tr -d '\n\r')
+elif _hermes_env="${HERMES_HOME:-$HOME/.hermes}/.env"; [ -f "$_hermes_env" ] && grep -q "^GITHUB_TOKEN=" "$_hermes_env"; then
+  export GITHUB_TOKEN=$(grep "^GITHUB_TOKEN=" "$_hermes_env" | head -1 | cut -d= -f2 | tr -d '\n\r')
   echo "AUTH_METHOD=curl"
 elif grep -q "github.com" ~/.git-credentials 2>/dev/null; then
   export GITHUB_TOKEN=$(grep "github.com" ~/.git-credentials | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
@@ -245,49 +245,3 @@ fi
 | Credentials not persisting | Check `git config --global credential.helper` — must be `store` or `cache` |
 | Multiple GitHub accounts | Use SSH with different keys per host alias in `~/.ssh/config`, or per-repo credential URLs |
 | `gh: command not found` + no sudo | Use git-only Method 1 above — no installation needed |
-| `Bad credentials` (401) but token looks correct | **Sandbox-credential-masking trap**: see pitfall below. The token you're passing on the wire may be `***`, not the literal string. Default to running the API call on the VPS host (see `remote-ssh-access` pitfall #14). |
-| Push rejected: `remote: - Push cannot contain secrets` | **GitHub push protection** detected a known-secret pattern in your commit (`.env` file content, log lines with API tokens, filenames matching). Resolve: (1) `git rm --cached` + add to `.gitignore`, (2) rebuild history with `rm -rf .git && git init` then re-push, or (3) for false positives, click the "Allow secret" URL GitHub gives you in the error output. Full pattern in `github-repo-management` Section 11. |
-
-### ⚠️ Diagnostic trap: "Permission denied (publickey)" often means repo doesn't exist
-
-When testing SSH auth you may see:
-```
-$ ssh -T git@github.com
-git@github.com: Permission denied (publickey).
-
-$ git ls-remote git@github.com:owner/repo.git
-<empty output, exit 0>
-```
-
-Two diagnostic possibilities — easy to confuse:
-
-**Possibility A — key is wrong / not added / wrong account.** GitHub's UI never tells you "this fingerprint isn't in any account I know of" — it just rejects.
-
-**Possibility B — repo doesn't exist (typo, never created, or in another org).** GitHub intentionally returns the same denial response to avoid letting attackers enumerate which repos exist under which accounts. `ls-remote` returns **empty exit 0** instead of "repository not found" to avoid the same enumeration leak.
-
-**How to disambiguate** (validated July 2026):
-
-```bash
-# 1. Confirm the key GitHub saw — its last_used timestamp updates on every accept
-curl -s https://api.github.com/users/<USERNAME>/keys | jq '.[] | {id, last_used, created_at, key: (.key | .[0:60])}'
-
-# If your key's last_used is recent (e.g. seconds ago) → key IS being received → AUTH IS WORKING.
-# That means the denial is "repo not found," not "key not authorized."
-
-# 2. Confirm the repo exists via the public API
-curl -sI https://api.github.com/repos/<owner>/<repo> | head -1
-# HTTP/2 200 → repo exists, the denial must have been about the key
-# HTTP/2 404 → repo doesn't exist; create it (or fix the name) and retry
-```
-
-**For the repo not-found case:** create the repo at https://github.com/new (must match `<owner>/<repo>` exactly — case-sensitive). After creation:
-```bash
-# Re-test SSH — should now return:
-$ ssh -T git@github.com
-Hi <username>! You've successfully authenticated, but GitHub does not provide shell access.
-
-$ git ls-remote git@github.com:owner/repo.git
-# now returns refs/heads/main
-```
-
-**For the key-rejected case:** verify the fingerprint you added matches what's in `ssh-keygen -lf <your_key.pub>`, confirm you were logged into the right GitHub account, and check https://github.com/settings/keys — GitHub shows the SHA256 fingerprint next to each key with last_used timestamp.
