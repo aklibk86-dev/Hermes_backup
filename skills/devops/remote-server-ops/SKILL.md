@@ -385,15 +385,19 @@ Key differences from regular command execution:
 
 Docker containers may fail to resolve hostnames (e.g. `redis`, `postgres`) when the host DNS is set to `1.1.1.1` (Cloudflare), which is blocked in China. Error: `dial tcp: lookup redis on 1.1.1.1:53: connect: network is unreachable`.
 
-**Fix: Configure Docker daemon with Google DNS:**
+**⚠️ WARNING: Do NOT set external DNS in daemon.json**
+
+Setting `{"dns":["8.8.8.8","8.8.4.4"]}` in `/etc/docker/daemon.json` **overrides Docker's built-in DNS resolver** (127.0.0.11), which breaks container-to-container hostname resolution (e.g., an `api` container cannot resolve the `redis` container by name). This makes Docker Compose services that depend on internal DNS fail.
+
+**Fix: Reset Docker DNS to default (internal resolver only):**
 ```bash
-mkdir -p /etc/docker
-echo '{"dns":["8.8.8.8","8.8.4.4"]}' > /etc/docker/daemon.json
+echo '{}' > /etc/docker/daemon.json
 systemctl restart docker
-# Then recreate containers (docker compose down && docker compose up -d)
+# Then recreate all containers
+cd /opt/project && docker compose down && docker compose up -d
 ```
 
-This applies globally to all Docker containers on the host.
+If you absolutely need custom DNS for internet resolution (e.g., for `apt-get` or `pip` inside containers), set it at the **host level** (`/etc/resolv.conf`) instead, NOT in Docker daemon.json. Docker's internal resolver at 127.0.0.11 forwards unknown hostnames to the host's resolvers.
 
 ### Cloudflare Multi-Level Subdomain SSL Issues
 

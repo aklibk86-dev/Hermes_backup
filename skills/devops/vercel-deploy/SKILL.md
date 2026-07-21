@@ -420,6 +420,37 @@ curl -X POST "https://api.vercel.com/v10/projects/PID/env?teamId=TEAM_ID" \
 
 **Always verify** after setting env vars: `vercel env ls --token TOKEN`. If they don't appear, re-set with the proper target.
 
+### Critical Pitfall: GitHub Auto-Deploy Silently Clears Env Vars
+
+Multiple times this session, env vars that were successfully set via API PATCH (returning "ok") were found empty on the NEXT session's check. The vars show as `(empty)` in `vercel env ls` and `decrypt=true` API calls, and the generated `env.js` uses default values instead of the configured ones.
+
+**Root cause unclear** — likely one of:
+- A GitHub push to the connected repo triggers a deployment that overwrites project-level env vars with some default state
+- The Vercel API has a consistency issue where PATCH responses are cached but the actual value isn't persisted
+- A concurrent deployment picks up stale env state
+
+**Defense in depth:**
+1. After each `vercel deploy --prod`, **always check the deployed env.js**:
+   ```bash
+   curl -s https://your-domain.com/env.js | grep -E "url_mode:|static_base_urls:\"
+   ```
+2. If values are defaults (e.g., `url_mode: "auto"` instead of `"static"`, or `static_base_urls: []`), **re-PATCH the env vars via API** and **redeploy**:
+   ```bash
+   # Get the current env var IDs and re-PATCH
+   python3 << 'PYEOF'
+   import json, subprocess as sp
+   # ... (see references/vercel-env-api.md for full code)
+   PYEOF
+   cd /tmp/project && vercel deploy --prod --yes --token <TOKEN>
+   ```
+3. After redeploy, **verify again** — the env.js should now have the correct values.
+4. If the env vars keep clearing, **do NOT rely on GitHub auto-deploy**. Deploy manually from a local clone with `.vercel/project.json` pointing to the correct project — this consistently preserves env vars at build time.
+
+**Sequence when env vars are found empty after deployment:**
+```
+PATCH env vars → vercel deploy --prod → verify env.js → if still wrong → repeat PATCH + deploy
+```
+
 ## Verification Checklist (Required Before Declaring "Done")
 
 After deploying, run ALL of these checks before telling the user it's working:

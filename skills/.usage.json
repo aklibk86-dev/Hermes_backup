@@ -251,13 +251,13 @@
     "created_at": "2026-07-19T07:11:19.080151+00:00",
     "created_by": null,
     "last_patched_at": "2026-07-19T07:11:29.971518+00:00",
-    "last_used_at": "2026-07-19T07:11:33.652957+00:00",
-    "last_viewed_at": "2026-07-19T07:11:33.649588+00:00",
+    "last_used_at": "2026-07-21T09:33:53.975091+00:00",
+    "last_viewed_at": "2026-07-21T09:33:53.970751+00:00",
     "patch_count": 3,
     "pinned": false,
     "state": "active",
-    "use_count": 1,
-    "view_count": 1
+    "use_count": 2,
+    "view_count": 2
   },
   "dogfood": {
     "archived_at": null,
@@ -744,14 +744,14 @@
     "archived_at": null,
     "created_at": "2026-07-12T01:45:44.862481+00:00",
     "created_by": "agent",
-    "last_patched_at": "2026-07-20T06:44:45.663002+00:00",
-    "last_used_at": "2026-07-20T06:45:06.205561+00:00",
-    "last_viewed_at": "2026-07-20T06:45:06.200481+00:00",
-    "patch_count": 52,
+    "last_patched_at": "2026-07-21T09:33:48.331218+00:00",
+    "last_used_at": "2026-07-21T09:33:24.064570+00:00",
+    "last_viewed_at": "2026-07-21T09:33:24.060724+00:00",
+    "patch_count": 53,
     "pinned": false,
     "state": "active",
-    "use_count": 93,
-    "view_count": 93
+    "use_count": 97,
+    "view_count": 97
   },
   "repo-content-exploration": {
     "archived_at": null,
@@ -939,14 +939,14 @@
     "archived_at": null,
     "created_at": "2026-07-14T10:05:00.706549+00:00",
     "created_by": "agent",
-    "last_patched_at": "2026-07-18T19:02:47.583897+00:00",
-    "last_used_at": "2026-07-20T05:48:03.240278+00:00",
-    "last_viewed_at": "2026-07-20T05:48:03.236124+00:00",
-    "patch_count": 25,
+    "last_patched_at": "2026-07-21T09:33:37.196185+00:00",
+    "last_used_at": "2026-07-21T09:32:49.896446+00:00",
+    "last_viewed_at": "2026-07-21T09:32:49.889229+00:00",
+    "patch_count": 26,
     "pinned": false,
     "state": "active",
-    "use_count": 43,
-    "view_count": 43
+    "use_count": 44,
+    "view_count": 44
   },
   "vercel-static-deploy": {
     "archived_at": null,
